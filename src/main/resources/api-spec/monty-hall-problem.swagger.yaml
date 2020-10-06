@@ -1,0 +1,53 @@
+swagger: "2.0"
+################################################################################
+#                              API Information                                 #
+################################################################################
+info:
+  description: "Monty Hall problem"
+  version: "1.0.0"
+  title: "Monty Hall problem"
+  contact:
+    email: "sachin97@hotmail.com"
+
+################################################################################
+#                  Host, Base Path, Schemes and Content Types                  #
+################################################################################
+
+basePath: /api
+tags:
+- name: "monty hall"
+  description: "Solving Monty Hall Problem"
+schemes:
+- "https"
+- "http"
+paths:
+  /play/{iterations}/{switch}:
+    get:
+      tags:
+      - "user"
+      summary: "Solve Monty Hall Problem"
+      description: ""
+      operationId: "solveMontyHallProblem"
+      produces:
+      - "text/plain"
+      parameters:
+      - name: "iterations"
+        in: "path"
+        description: "Number of iterations to perform to solve the problem"
+        required: true
+        type: integer
+      - name: "switch"
+        in: "path"
+        description: "Whether participant wants to switch"
+        required: true
+        type: boolean
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: string
+            example: Winning percentage for the given input is 100%!!
+        "400":
+          description: "Invalid suparameters plied"
+        "404":
+          description: "Not found"
