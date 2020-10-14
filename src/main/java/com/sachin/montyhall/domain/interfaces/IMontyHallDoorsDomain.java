@@ -8,4 +8,6 @@ public interface IMontyHallDoorsDomain {
     public List<String> getRandomlyAssignedDoorList();
     public boolean isThereCARBehindTheDoor(int chosenDoor);
     public int chooseDoor();
+    public double getWinCount();
+    public void incrementWinCount();
 }

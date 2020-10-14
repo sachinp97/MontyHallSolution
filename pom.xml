@@ -19,7 +19,7 @@
 		<yaml.file>${project.basedir}/src/main/resources/api-spec/monty-hall-problem.swagger.yaml</yaml.file>
 		<generated-sources-path>${project.build.directory}/generated-sources</generated-sources-path>
 		<generated-sources-java-path>main/java</generated-sources-java-path>
-		<version.swagger.codegen>2.3.1</version.swagger.codegen>
+		<version.swagger.codegen>3.0.22</version.swagger.codegen>
 		<api-package>com.sachin.montyhall.resources.interfaces</api-package>
 		<model-package>com.sachin.montyhall.resources.models</model-package>
 	</properties>
@@ -77,7 +77,15 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
-				<groupId>io.swagger</groupId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.20</version>
+				<configuration>
+					<argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>io.swagger.codegen.v3</groupId>
 				<artifactId>swagger-codegen-maven-plugin</artifactId>
 				<version>${version.swagger.codegen}</version>
 				<executions>

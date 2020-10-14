@@ -1,2 +1,1 @@
-GET http://localhost:8080/api/play/1000/true
-Accept: text/plain
+GET http://localhost:8080/api/play/10001/true

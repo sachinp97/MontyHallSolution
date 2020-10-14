@@ -16,8 +16,7 @@ public class PlayApiImpl implements PlayApi {
 
     @Override
     public ResponseEntity<String> solveMontyHallProblem(Integer iterations, Boolean switched) {
-        String returnString = "Winning percentage for the given input is "
-                + service.getWinPercentage(iterations, switched) + "!!";
+        String returnString = service.getSolutionResults(iterations, switched);
         return new ResponseEntity<>(returnString, HttpStatus.OK);
     }
 }

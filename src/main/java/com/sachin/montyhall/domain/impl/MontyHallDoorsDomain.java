@@ -8,16 +8,32 @@ import java.util.Random;
 
 import com.sachin.montyhall.domain.interfaces.IMontyHallDoorsDomain;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
 
 @Component
+@Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class MontyHallDoorsDomain implements IMontyHallDoorsDomain {
-    private static final int NUMBER_OF_DOORS = 3;
+    
+    private static int NUMBER_OF_DOORS = 0;
+    
     private static final String GOAT = "Goat";
+    
     private static final String CAR = "Car";
+    
     private List<String> randomlyAssignedDoorList;
+    
     private Random doorNumberGenerator;
+    
+    private double winCount;
 
+    @Value("${montyhall.numberofdoors}")
+    public void setNumberOfDoors(int number){
+        NUMBER_OF_DOORS = number;
+    }
     public MontyHallDoorsDomain() {
         try {
             this.doorNumberGenerator = SecureRandom.getInstanceStrong();
@@ -63,4 +79,13 @@ public class MontyHallDoorsDomain implements IMontyHallDoorsDomain {
     public int chooseDoor() {
         return doorNumberGenerator.nextInt(2);
     }
+    
+    public double getWinCount() {
+        return winCount;
+    }
+
+    public void incrementWinCount() {
+        this.winCount++;
+    }
+
 }

@@ -1,4 +1,4 @@
-swagger: "2.0"
+openapi: 3.0.0
 ################################################################################
 #                              API Information                                 #
 ################################################################################
@@ -13,13 +13,14 @@ info:
 #                  Host, Base Path, Schemes and Content Types                  #
 ################################################################################
 
-basePath: /api
+servers:
+  - url: http://api.example.com/api
+    description: Server description
+
 tags:
 - name: "monty hall"
   description: "Solving Monty Hall Problem"
-schemes:
-- "https"
-- "http"
+
 paths:
   /play/{iterations}/{switch}:
     get:
@@ -28,25 +29,27 @@ paths:
       summary: "Solve Monty Hall Problem"
       description: ""
       operationId: "solveMontyHallProblem"
-      produces:
-      - "text/plain"
       parameters:
-      - name: "iterations"
+      - name: iterations
         in: "path"
         description: "Number of iterations to perform to solve the problem"
         required: true
-        type: integer
+        schema: 
+          type: integer
       - name: "switch"
         in: "path"
         description: "Whether participant wants to switch"
         required: true
-        type: boolean
+        schema:
+          type: boolean
       responses:
         "200":
           description: "successful operation"
-          schema:
-            type: string
-            example: Winning percentage for the given input is 100%!!
+          content:
+            text/raw:   
+              schema:
+                type: string
+                example: Winning percentage for the given input is 100%!!
         "400":
           description: "Invalid suparameters plied"
         "404":
