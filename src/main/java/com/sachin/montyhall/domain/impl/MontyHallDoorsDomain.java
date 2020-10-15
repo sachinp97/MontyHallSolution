@@ -8,6 +8,7 @@ import java.util.Random;
 
 import com.sachin.montyhall.domain.interfaces.IMontyHallDoorsDomain;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -17,9 +18,7 @@ import org.springframework.web.context.WebApplicationContext;
 @Component
 @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class MontyHallDoorsDomain implements IMontyHallDoorsDomain {
-    
-    private static int NUMBER_OF_DOORS = 0;
-    
+        
     private static final String GOAT = "Goat";
     
     private static final String CAR = "Car";
@@ -30,11 +29,8 @@ public class MontyHallDoorsDomain implements IMontyHallDoorsDomain {
     
     private double winCount;
 
-    @Value("${montyhall.numberofdoors}")
-    public void setNumberOfDoors(int number){
-        NUMBER_OF_DOORS = number;
-    }
-    public MontyHallDoorsDomain() {
+    @Autowired
+    public MontyHallDoorsDomain(@Value("${montyhall.numberofdoors}") final int numberofdoors) {
         try {
             this.doorNumberGenerator = SecureRandom.getInstanceStrong();
         } catch (NoSuchAlgorithmException e) {
@@ -43,7 +39,7 @@ public class MontyHallDoorsDomain implements IMontyHallDoorsDomain {
 
         this.randomlyAssignedDoorList = new ArrayList<>();
         randomlyAssignedDoorList.add(CAR);
-        for (int i = 1; i < NUMBER_OF_DOORS; i++) {
+        for (int i = 1; i < numberofdoors; i++) {
             randomlyAssignedDoorList.add(GOAT);
         }
     }

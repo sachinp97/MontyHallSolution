@@ -1,1 +1,1 @@
-GET http://localhost:8080/api/play/10001/true
+GET http://localhost:8080/api/play/10000/true
